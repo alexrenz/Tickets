@@ -1,0 +1,387 @@
+/**
+      
+      KnowWhat
+      Flexible Ticket System
+      
+    * @author  Alexander Renz
+    * @version 1.2
+    * @module  stylesheet-main
+    
+*/
+
+body
+{
+  font-family:      Arial, Verdana;
+  font-size:        13px;
+  margin:           0px 0px 0px 10px;
+}
+
+h1
+{
+  font-size:        26px;
+  margin:           0px;
+  font-weight:      normal;
+}
+
+h2
+{
+  margin-left:      10px;
+  border-top:       1px solid #E3EAEB;
+}
+
+img
+{
+  border:           0;
+}
+
+.thread
+{
+  margin-top:10px;
+}
+
+.thread .content 
+{
+  /*border-top:       1px solid #E3EAEB;*/
+  padding:          0px 6px;
+/*  border-bottom:    2px dashed #E3EAEB;
+  margin-bottom:    3px;*/
+  clear:            both;
+  float:            left;
+  width:            700px;
+  color:            #000;/*#1A3874;*/
+  font-family:      Verdana, Arial;
+}
+
+.thread .content .text
+{
+  border: 1px solid #E3EAEB;
+  margin-left:      4px;
+  padding:          10px 10px 4px 10px;
+  
+}
+
+.thread .content .text p
+{
+  margin:0px;
+  margin-bottom:6px;
+}
+
+.thread .manage em
+{
+  font-size: 10px;
+  font-style: normal;
+}
+
+.thread .content .uplink
+{
+  width: 20px;
+  float:right;
+  position:relative;
+  bottom:20px;
+}
+
+.thread .content blockquote {
+  border-color:#FFFFFF;
+  border-style:solid;
+  border-width:0 0 0 3px;
+  margin-left:20px;
+  padding:6px 10px;
+}
+
+.thread .content blockquote p
+{
+  margin:2px;
+  padding: 0px;
+}
+
+.thread .content h1
+{
+  border: 0;
+}
+
+.thread .content pre
+{
+  margin-left:14px;
+  padding: 0px;
+}
+
+.threadowner
+{
+  /*background-color: #EBEFF8;*/
+  background-color: #F4F4F4;
+  margin-bottom:           10px;
+}
+
+.preview > div
+{
+  margin-bottom:           10px;
+}
+
+
+
+.plainbox
+{
+  width:            674px;
+  border: 1px solid #E3EAEB;
+  margin:           10px;
+  margin-top:       0px;
+  padding:          10px 10px 10px 10px;
+  background-color: #F4F4F4;
+}
+
+ins 
+{
+  font-style:italic;
+  margin-left:10px;
+  text-decoration:none;
+}
+
+ins:before 
+{
+  color:#999999;
+  content:"edit: ";
+}
+
+.developer { background-color: #E7E7E7; }
+.employe { background-color: #FFE9FE; }
+
+.devAlexander { background-color: #E3FCCA; }
+.devDavid { background-color: #E8F1FF; }
+.devStefano { background-color: #FFEDD3; }
+.devGerlach { background-color: #efbec3; }
+  
+  
+
+.thread .read
+{
+  border-left:      2px solid #E3EAEB;
+}
+
+.thread .unread { border-left:      2px solid #D79BA3; }
+.thread .createnew { border-left:      2px solid #9ED08C; }
+
+.thread .manage
+{
+  padding:          0px 0px 0px 4px;
+  border-top: 0px dashed #E3EAEB;
+  width: 150px;
+  float:            left;
+}
+
+
+.thread .headline span 
+{
+  border-left:      1px solid #E3EAEB;
+  padding:          2px 8px;
+  font-size:        14px;
+}
+
+.thread .headline span.first
+{
+  border: 0;
+  padding-left:0;
+}
+
+.thread .headline a
+{
+  text-decoration: none;
+}
+
+
+.thread .tkInwork { background-color: #E7C06D; }
+.thread .tkSolved { background-color: #9ED08C; }
+.thread .tkNew { background-color: #FB7474; }
+
+.thread .manage input, .thread .manage button
+{
+  background-color: #FFF;
+  border:0;
+  padding: 0px;
+  margin:0px;
+  color:#000;
+  text-decoration:none;
+}
+
+.thread .manage input:hover, .thread .manage button:hover
+{
+  font-weight:bold;
+  color:#000;
+  cursor:pointer;
+}
+
+
+.tLink, .thread .manage a
+{
+  background-color: #FFF;
+  border:0;
+  padding: 1px 0px;
+  margin:4px;
+  color:#000;
+  text-decoration:none;
+  font-size: 13px;
+  border-bottom: 1px solid rgb(227, 234, 235);
+}
+
+.tLink:hover, .thread .manage a:hover
+{
+  color:#000;
+  cursor:pointer;
+  border-bottom-width: 2px;
+}
+
+.tLink
+{
+  line-height: 20px;
+}
+
+
+.thread .content div a 
+{
+  border: 0;
+  text-decoration:underline;
+}
+
+
+
+.pagination
+{
+  text-decoration: none;
+  color:#000;
+  padding: 6px;
+  line-height:18px;
+  border: 2px solid #FFF;
+}
+
+.currentPage
+{
+  border: 2px solid #E3EAEB;
+}
+
+.highlight { background-color: yellow; }
+
+table
+{
+  border-collapse:  collapse;
+  border:           1px solid #d3d1d1;
+}
+
+table td
+{
+  border:           1px solid #d3d1d1;
+  padding:          10px;
+}
+
+
+textarea, input
+{
+  font-family:      Arial, Verdana;
+  font-size:        12px;
+}
+
+.thread textarea, .oneline
+{
+  border: 1px solid #E3EAEB;
+  font-family: Arial, Verdana;
+  font-size: 12px;
+  padding: 4px; 
+}
+.thread .text .oneline { font-size: 20px; }
+
+.searchPassive { color: #B4B4B4; }
+.searchActive { border-color: #FB7474; }
+
+
+button
+{
+  font-size:        12px;
+  font-family:      Arial;
+}
+
+.filterButton
+{
+  font-size:12px;
+  text-decoration:none;
+  float:right;
+  color:#000;
+  border-bottom: 1px solid #E3EAEB;
+  border-left: 1px solid #E3EAEB;
+  margin:0px;
+  padding: 6px 16px;
+}
+.filterButton:hover
+{
+  border-bottom-width: 2px;
+}
+
+.filterButton.current
+{
+  text-decoration: underline;
+}
+
+
+.filterButton.work { color: #E7C06D; border-color: #E7C06D; }
+.filterButton.solved { color: #9ED08C; border-color: #9ED08C; }
+.filterButton.top { color:#FB7474; border-color: #FB7474; }
+
+
+/* ----------------------------
+    Overview
+   ---------------------------- */
+
+#overview 
+{
+  padding:0;
+  margin:0;
+  display:block;
+}
+
+#overview  > div
+{
+  border-bottom: 1px solid #EEE;
+}
+
+#overview div div a
+{
+  float:left;
+  height:30px;
+  padding:5px 0px;
+  line-height:30px;
+}
+
+#overview div.status a
+{
+  font-size:13px;
+  width:50px;
+}
+
+#overview div.info, #overview div.info a
+{
+  color: #AAA;
+  font-size:13px;
+  padding-left: 10px;
+}
+
+#overview div.subject, #overview div.subject a
+{
+  color: #000;
+  font-size:16px;
+}
+
+
+em.unread{ border: 0; color:#FB7474; }
+
+
+#overview  a
+{
+  text-decoration:none;
+}
+
+#overview em
+{
+  padding-left:4px;
+}
+
+
+#overview em.tkInwork { color: #E7C06D; }
+#overview em.tkSolved { color: #9ED08C; }
+#overview em.tkNew { color:#FB7474; }
