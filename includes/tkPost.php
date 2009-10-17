@@ -135,7 +135,7 @@ class tkPost extends felox
         }
         #exit;
         $text = $textile->TextileThis( $text );
-        $text = preg_replace( "#(http://)(www\.)?([\w\./\-\?\/%=&;\+]+)#", "<a target=\"_blank\" href=\"$1$2$3\">$1$2$3</a>", $text );
+        $text = preg_replace( "#(http://)(www\.)?([\w\./\-\?\/%=&;\+:]+)#", "<a target=\"_blank\" href=\"$1$2$3\">$1$2$3</a>", $text );
         // Special replacements
         $replace = Array( "[codework]" => "<pre><code>", "[/codework]" => "</code></pre>" );
         $text = str_replace( array_keys( $replace ), $replace, $text );
