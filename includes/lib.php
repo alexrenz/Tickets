@@ -292,7 +292,7 @@ function tkMakeHtml( $tmpl, &$prm )
   foreach( $prm as $search=>$replace )
   {
     //echo "replace $search by $replace <br>";
-    $tmpl = preg_replace( "/<<".$search.">>/", $replace, $tmpl );
+    $tmpl = str_replace( "<<".$search.">>", $replace, $tmpl );
   }
   
     #echo "replace $search by $replace <br>";
@@ -302,7 +302,7 @@ function tkMakeHtml( $tmpl, &$prm )
   foreach( $tmplGlobalReplacements as $search=>$replace )
   {
     #echo "replace $search by $replace <br>";
-    $tmpl = preg_replace( "/<<".$search.">>/", $replace, $tmpl );
+    $tmpl = str_replace( "<<".$search.">>", $replace, $tmpl );
   }
   
   $tmpl = preg_replace( "/<<[\w:]+>>/", "", $tmpl );

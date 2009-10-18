@@ -128,10 +128,11 @@ class tkPost extends felox
               $lines[$key] = " ".$line;
           }
           
-          $inner = implode( "\n", $lines );
+          $code = implode( "\n", $lines );
+          
           
           $text = preg_replace( "/\[code\]([\s\S]*)\[\/code\]/U", "[codework".$cI."]", $text, 1 );
-          $codeReps[$cI++] = $inner;
+          $codeReps[$cI++] = $code;
           #var_dump( $lines );
         }
         #exit;
