@@ -20,6 +20,7 @@ h1
 {
   font-size:        26px;
   margin:           0px;
+  padding-top:      14px;
   font-weight:      normal;
 }
 
@@ -322,9 +323,9 @@ button
   font-family:      Arial;
 }
 
-.filterButton
+#filter
 {
-  font-size:12px;
+  font-size:14px;
   text-decoration:none;
   float:right;
   color:#000;
@@ -333,20 +334,28 @@ button
   margin:0px;
   padding: 6px 16px;
 }
-.filterButton:hover
+
+#filter a
 {
-  border-bottom-width: 2px;
+  text-decoration: none;
+  margin: 0px 6px;
+  color: #999;
 }
 
-.filterButton.current
+#filter a:hover
 {
   text-decoration: underline;
 }
 
+#filter .current
+{
+  text-decoration: underline;
+}
 
-.filterButton.work { color: #E7C06D; border-color: #E7C06D; }
-.filterButton.solved { color: #9ED08C; border-color: #9ED08C; }
-.filterButton.top { color:#FB7474; border-color: #FB7474; }
+#filter .unread { color: #333; }
+#filter .work { color: #E7C06D;  }
+#filter .solved { color: #9ED08C; }
+#filter .top { color:#FB7474; }
 
 
 /* ----------------------------

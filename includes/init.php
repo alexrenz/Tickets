@@ -56,11 +56,11 @@ $confStripQueryVars = "d,c,msg,id,offset,do,x,y";
 define( 'uStrip', $confStripQueryVars );
 
 $confFilters = Array( 
+  "Alle"=>"",
   "Ungelesen"=>"unread",
-  "Gel&ouml;st"=>"solved",
-  "Workdesk"=>"work",
   "Aktuell"=>"top",
-  "Alle"=>""
+  "Workdesk"=>"work",
+  "Gel&ouml;st"=>"solved",
   );
   
 /* 
@@ -180,7 +180,7 @@ $tmpl = tkGetTemplate( $tkTmpl );
 $confProtectVars = Array( );
 
   
-$tmplFilterChoice = "";
+$tmplFilterChoice = '<div id="filter">';
 foreach( $confFilters as $name=>$filter )
 {
   $split = split( "::", $filter );
@@ -197,8 +197,9 @@ foreach( $confFilters as $name=>$filter )
   if( $_GET["f"] == $filter ) $current = " current";
   else $current = "";
   if( $filter == "" ) $filter="aktuell";
-  $tmplFilterChoice .= '<a href="'.$link.'" title="'.$name.'" class="filterButton '.$filter.$current.'">'.$name.'</a>&nbsp;&nbsp;&nbsp;';
+  $tmplFilterChoice .= '<a href="'.$link.'" title="'.$name.'" class="'.$filter.$current.'">'.$name.'</a>';
 }
+$tmplFilterChoice .= '</div>';
 
 $topmenuHtml = getTopAdminMenuHtml();
 
