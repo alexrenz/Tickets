@@ -115,10 +115,11 @@ class tkPost extends felox
         
         preg_match_all( "/\[code\]([\s\S]*)\[\/code\]/U", $text, $subpatterns );
         #var_dump ($subpatterns ); exit; 
-        
+        $codeReps = Array(); $cI=0;
         // For every [code][/code] element in the post
         foreach( $subpatterns[1] as $num=>$inner )
         {
+          
           $lines = explode( "\n", $inner );
           
           foreach( $lines as $key=>$line )
@@ -129,16 +130,20 @@ class tkPost extends felox
           
           $inner = implode( "\n", $lines );
           
-          $text = preg_replace( "/\[code\]([\s\S]*)\[\/code\]/U", "[codework]".$inner."[/codework]", $text, 1 );
-          
+          $text = preg_replace( "/\[code\]([\s\S]*)\[\/code\]/U", "[codework".$cI."]", $text, 1 );
+          $codeReps[$cI++] = $inner;
           #var_dump( $lines );
         }
         #exit;
         $text = $textile->TextileThis( $text );
         $text = preg_replace( "#(http://)(www\.)?([\w\./\-\?\/%=&;\+:\#]+)#", "<a target=\"_blank\" href=\"$1$2$3\">$1$2$3</a>", $text );
         // Special replacements
-        $replace = Array( "[codework]" => "<pre><code>", "[/codework]" => "</code></pre>" );
-        $text = str_replace( array_keys( $replace ), $replace, $text );
+        #$replace = Array( "[codework]" => "<pre><code>", "[/codework]" => "</code></pre>" );
+        foreach( $codeReps as $key => $code )
+          $text = str_replace( "[codework".$key."]", "<pre><code>".$code."</code></pre>", $text );
+          
+        #$replace = Array( "[codework]" => "<pre><code>" );
+        #$text = str_replace( array_keys( $replace ), $replace, $text );
         return $text;
       
       

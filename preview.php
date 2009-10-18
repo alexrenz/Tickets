@@ -1,9 +1,19 @@
 <?php
 
-include_once( "includes/classTextile.php" );
-$textile = new Textile( );
+define( 'TICKET', 'preview' );
 
-echo $textile->TextileThis( $_POST["previewText"] );
+$bckdir = getcwd( );
+$curdir = chdir( dirname( __FILE__ ) );
+
+
+include( "includes/init.php" );
+
+
+
+$post = new tkPost( 0 );
+
+
+echo $post->handleField( "text", $_POST["previewText"] );
 
 
 ?>

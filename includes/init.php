@@ -12,6 +12,27 @@
 
 defined( 'TICKET' ) or die( "" );
 
+header("Content-Type: text/html; charset=utf-8"); 
+
+
+
+// Magic Quotes Handling
+function stripslashes_nested($v)
+{
+  if (is_array($v)) {
+    return array_map('stripslashes_nested', $v);
+  } else {
+    return stripslashes($v);
+  }
+}
+
+if (get_magic_quotes_gpc()) 
+{
+  $_GET = stripslashes_nested($_GET);
+  $_POST = stripslashes_nested($_POST);
+  $_COOKIES = stripslashes_nested($_COOKIES);
+}
+
 /* 
       ----------------------------
       

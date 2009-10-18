@@ -81,28 +81,53 @@ img
 }
 
 .thread .content blockquote {
-  border-color:#FFFFFF;
-  border-style:solid;
-  border-width:0 0 0 3px;
-  margin-left:20px;
-  padding:6px 10px;
+  width: 600px;
+  border-top: 1px dotted #999;
+  border-left: 1px dotted #999;
+  margin-left:14px;
+  padding: 0px 6px;
 }
 
 .thread .content blockquote p
 {
   margin:2px;
-  padding: 0px;
+  padding: 6px;
 }
 
-.thread .content h1
+
+.thread .content blockquote p:before
+{
+  content: "zitat"; 
+  color: #999;
+  padding: 0px;
+  float:right;
+}
+
+.content h1, .content h2, .content h3
 {
   border: 0;
 }
 
 .thread .content pre
 {
+  width: 600px;
+  border-top: 1px dotted #999;
+  border-left: 1px dotted #999;
   margin-left:14px;
+  padding: 6px;
+}
+
+.thread .content code
+{
+  width: 400px;
+}
+
+.thread .content code:before
+{
+  content: "code"; 
+  color: #999;
   padding: 0px;
+  float:right;
 }
 
 .threadowner
