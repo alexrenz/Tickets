@@ -675,6 +675,10 @@ else
   $thread = new tkThread( 0 );
   
   $where = Array( );
+  $addTables = Array( );
+  
+  // remote uses "unread" filter
+  if( tkREMOTE == "fetchNewThreadNum" ) $_GET['f'] = 'unread';
   
   // Filters ?
   switch( $_GET['f'] )
@@ -689,6 +693,13 @@ else
       
     case "top":
       $where["current"]  = "status<=4";
+      break;
+    
+    case "unread":
+      $addTables[] = "tk_threads_marks";
+      $where["unread_rightThread"] = "tk_threads.id = tk_threads_marks.threadid";
+      $where["unread_rightUser"] = "tk_threads_marks.userid = ".$tkUser['id'];
+      $where["unread_isUnread"] = "tk_threads_marks.lastcheck < tk_threads.lastchange";
       break;
     
     default:
@@ -787,14 +798,24 @@ else
    // Set up where string
   $whereStr = tkWhereArrayToStr( $where );
   
-  // How many new threads?
-  $newThreadNum = $thread->countNotifies( $where );
+  
+  
+  // Request the list of Threads
+  $thread->requestList( $whereStr, $limit, "lastchange", "DESC", $addTables );
+  
+  
+  // How many unread threads for the logged in user?
+  $newThreadNum = $thread->numListElements;
+  
+  #$newThreadNum = $thread->countNotifies( $where, $addTables );
+  
   #echo "num".$newThreadNum;
-  // if the Host script just wanted to know, how many unread tickets we hav
+  
+  
+  // EXIT POINT if the Host script just wanted to know, how many unread tickets we hav
   if( tkREMOTE != "fetchNewThreadNum" )
   {  
   
-  $thread->requestList( $whereStr, $limit, "lastchange", "DESC" );
   
   $rowsHtml = "";
   while( $dataRaw = $thread->getListRow( ) )

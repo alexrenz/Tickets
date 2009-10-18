@@ -96,8 +96,23 @@ class felox
 */
   
   // Request a result set of threads
-  function requestList( $addWhere = "", $limit = "", $orderBy = "", $orderDir = "ASC" )
+  function requestList( $addWhere = "", $limit = "", $orderBy = "", $orderDir = "ASC", $addTables = Array() )
   {
+    /* introduce function parameters as an array */
+    
+    if( $addWhere == "asArray" )
+    {
+      $params = $limit;
+      $addWhere = $params["where"];
+      $limit = $params["limit"];
+      $orderBy = $params["orderBy"];
+      $orderDir = $params["orderDir"];
+      
+      $addTables = $params["addTables"];
+    
+    }
+    /* end array workaround */
+    
     global $tkUser;
     if( !empty( $addWhere ) )
       $where = $addWhere;
@@ -105,13 +120,18 @@ class felox
     if( !empty( $orderBy ) )
       $orderBy = "ORDER BY
         `".$orderBy."` ".$orderDir." ";
+    
+    // additional tables
+    $addTableSql = "";
+    foreach( $addTables as $addTable )
+      $addTableSql .= ", ".$addTable;
       
     if( !empty( $where ) ) $where = "WHERE ".$where;
     $origSql = "
       SELECT 
         *
       FROM
-        ".PRFX.$this->table."
+        ".PRFX.$this->table.$addTableSql."
       ".$where."
       ".$orderBy."";
         
@@ -123,6 +143,8 @@ class felox
     
     $this->listRes = $this->query( $sql );
     
+      #echo $sql;
+      #exit;
     
     if( $this->num( $this->listRes )  > 0 )
     {
@@ -132,7 +154,6 @@ class felox
       $this->numTotalElements = $this->num( $cache );
       
       // One request to see, how many threads there are at all (without LIMIT)
-      
       return true;
     }
     else

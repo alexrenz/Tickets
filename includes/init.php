@@ -56,6 +56,7 @@ $confStripQueryVars = "d,c,msg,id,offset,do,x,y";
 define( 'uStrip', $confStripQueryVars );
 
 $confFilters = Array( 
+  "Ungelesen"=>"unread",
   "Gel&ouml;st"=>"solved",
   "Workdesk"=>"work",
   "Aktuell"=>"top",

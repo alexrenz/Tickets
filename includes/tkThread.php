@@ -5,7 +5,6 @@
       Flexible Ticket System
       
     * @author  Alexander Renz
-    * @version 1.0 alpha 3
     * @module  felox-thread
     
 */
@@ -595,8 +594,9 @@ Message: $message"."</pre>";*/
     }
   }
   
-  function countNotifies( $addWhere = "", $user = "" )
+  /*function countNotifies( $addWhere = "", $user = "", $addTables )
   {
+    die( "You just called " );
     if( $user == "" )
     {
       global $tkUser;
@@ -631,7 +631,7 @@ Message: $message"."</pre>";*/
     }
     
     return $count;
-  }
+  }*/
   
   function subscribe( $action, $user = "" )
   {
