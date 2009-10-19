@@ -452,8 +452,8 @@ class tkThread extends felox
         case "onNew":
           $eTmpl = $tmpl["email:newThread"];
           
-          #$content = $this->posts["create"]->handleField( "text", $this->posts["create"]->dataRaw["text"] );
           $content = $this->posts["create"]->dataRaw["text"];
+          
           $author = $this->handleField( "author", $this->dataRaw["author"] );
           break;
         default:
@@ -462,6 +462,7 @@ class tkThread extends felox
           
       }
       
+      $htmlContent = $this->posts["create"]->handleField( "text", $content )  ;
       
       $lastCheckOnThread = $this->getLastCheck( $tkUser["id"], $dataRaw["id"] );
       $unreadPosts = 0;
@@ -479,31 +480,30 @@ class tkThread extends felox
       
       
       
-      $to      = $user["email"];
       $subjval = $this->handleField( "subject", $this->dataRaw["subject"] );
-      $subject = "[".$tkConfSysName."]".' \''.$subjval.'\': '.$ln_eNotify_titles[$cause];
+      $subject = $ln_eNotify_titles[$cause].': \''.$subjval.'\'';
       
       global $tkConfPath;
       
       // No Br in Mails
-      $text = $content;
+      #$text = $content;
       #$text = str_replace( "\n", "<br />", $text );
-      $text = stripslashes( $text );
-      $content = $text;
+      #$text = stripslashes( $text );
+      #$content = $text;
       
       $params = Array( 
         "username"=>$user["name"],
         "author"=>$author,
         "subject"=>$subjval,
         "status"=>$this->dataRaw["status"],
-        "content"=>$content,
+        "content"=>$htmlContent,
         "link"=>$tkConfPath."index.php?id=".$this->dataRaw["frontid"]."&p=".$firstUnreadPost."#comment".$firstUnreadPost,
         "frontid"=>$this->dataRaw["frontid"] );
       
-      $message = $tkConfNotMailTmpl;
+      #$message = $tkConfNotMailTmpl;
       $message = tkMakeHtml( $eTmpl, $params );
       
-      $headers = 'From: KG-Ticket-Notify <'.$tkConfBotMail . ">\r\n" .
+      /*$headers = 'From: KG-Ticket-Notify <'.$tkConfBotMail . ">\r\n" .
           'Reply-To: KG-Ticket-Notify <'.$tkConfBotMail . ">\r\n" . 
           "MIME-Version: 1.0" . "\r\n";
           "Content-type: text/html; charset=ISO-8859-1" ;
@@ -517,7 +517,7 @@ class tkThread extends felox
         'Ö' => 'Oe',
         'Ü' => 'Ue'
       );
-      $subject = str_replace( array_keys( $trans_table), $trans_table, $subject );
+      $subject = str_replace( array_keys( $trans_table), $trans_table, $subject );*/
       
       
       // don't notify the user himself
@@ -525,8 +525,11 @@ class tkThread extends felox
       {
         
         // Send the notification mail
-        mailLog( $to, $subject, $message, $headers );
-        $x = mail( $to, $subject, $message, $headers );
+        #die( $htmlContent );
+        mailLog( $user["email"], $subject, $message, $headers );
+        #$x = mail( $to, $subject, $message, $headers );
+        $this->sendMail( $subject, $message, $user["email"], $user["name"], "Dies ist eine HTML-Email...man kann sie nur mit einem HTML-Email-View ansehen..." );
+        #die( "stop" );
         #echo "sendmail";
          /*echo "<pre>"."Send Mail
 To: $to; 
@@ -555,7 +558,45 @@ Message: $message"."</pre>";*/
     
   }
           
-      
+  function sendMail( $subject, $body, $email, $username, $altBody )
+  {
+    include_once( "class.phpmailer.php" );
+    $mail             = new PHPMailer();
+    
+    $mail->IsSMTP();
+    $mail->SMTPAuth   = true;                  // enable SMTP authentication
+    $mail->SMTPSecure = "ssl";                 // sets the prefix to the servier
+    $mail->Host       = "smtp.gmail.com";      // sets GMAIL as the SMTP server
+    $mail->Port       = 465;                   // set the SMTP port for the GMAIL server
+
+    $mail->Username   = "tickets@kgs.name";  // GMAIL username
+    $mail->Password   = "2EbAsWUgu@pUx&ju+ehu";            // GMAIL password
+
+
+    $mail->AddReplyTo("tickets@kgs.name","Nicht hier antworten!");
+
+    $mail->From       = "tickets@kgs.name";
+    $mail->FromName   = "KG Tickets";
+
+    // here
+    $mail->Subject    = $subject;
+    $mail->AltBody    = $altBody; // optional, comment out and test
+    $mail->WordWrap   = 60; // set word wrap
+    $mail->MsgHTML($body);
+
+    $mail->AddAddress($email, $username);
+
+
+    #$mail->AddAttachment("images/phpmailer.gif");             // attachment
+
+    $mail->IsHTML(true); // send as HTML
+
+    if(!$mail->Send()) {
+      echo "Mailer Error: " . $mail->ErrorInfo;
+    } else {
+      echo "Message sent!";
+    }
+  }
   
   
   // Get the last view of a user of a thread (value is this thread)

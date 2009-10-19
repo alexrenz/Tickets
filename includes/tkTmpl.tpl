@@ -299,31 +299,31 @@ Ticket-Notify<</email:statusChange>>
 
 
 
-<<email:newThread>>Hallo <<username>>,
+<<email:newThread>>Hallo <<username>>,<br /><br />
 
-<<author>> hat ein neues Ticket mit dem Titel "<<subject>>" erstellt.
+<<author>> hat ein neues Ticket mit dem Titel "<<subject>>" erstellt.<br /><br />
 
-<<subject>>
----------------------------------------
+<h1><<subject>></h1>
+<div style="border: 1px solid #E3EAEB; padding: 8px; margin: 10px 0px; background-color: #F4F4F4;">
 <<content>>
----------------------------------------
-
+</div>
+<br /><br />
 Zum Thema: <<link>>
-
+<br /><br />
 
 Ticket-Notify<</email:newThread>>
 
 
-<<email:newComment>>Hallo <<username>>,
+<<email:newComment>>Hallo <<username>>,<br /><br />
 
-<<author>> hat in dem Ticket <<frontid>> ("<<subject>>") einen neuen Kommentar abgegeben.
+<<author>> hat in dem Ticket <<frontid>> ("<<subject>>") einen neuen Kommentar abgegeben.<br /><br />
 
----------------------------------------
+<hr />
 <<content>>
----------------------------------------
-
+<hr />
+<br /><br />
 Zum Thema: <<link>>
-
+<br /><br />
 
 Ticket-Notify<</email:newComment>>
 

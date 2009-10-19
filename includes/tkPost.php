@@ -107,7 +107,12 @@ class tkPost extends felox
 #        $text = wordwrap( $text, 150, "<br />" );
 #        $text = str_replace( "\n", "<br />", $text );
 //         onClick=\"return window.confirm('Bist du sicher, dass du den externen Link $1$2$3 öffnen willst?')\"
-        #$text = stripslashes( $text );
+
+        // Important for the mail function
+        $text = str_replace( '\r\n', "\r\n", $text );
+        
+        $text = stripslashes( $text );
+        
         global $textile;
         $text = htmlspecialchars( $text );
         
@@ -197,7 +202,7 @@ class tkPost extends felox
         #echo "prepare the text";
         #var_dump( $fieldVal );
         
-        $test = mysql_real_escape_string( $fieldVal );
+        #$test = mysql_real_escape_string( $fieldVal );
         #var_dump( $test );
         #exit;
         return mysql_real_escape_string( $fieldVal );
