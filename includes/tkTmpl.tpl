@@ -308,7 +308,7 @@ Ticket-Notify<</email:statusChange>>
 <<content>>
 </div>
 <br /><br />
-Zum Thema: <<link>>
+<a href="<<link>>">Zum Thema</a>
 <br /><br />
 
 Ticket-Notify<</email:newThread>>
@@ -322,7 +322,7 @@ Ticket-Notify<</email:newThread>>
 <<content>>
 <hr />
 <br /><br />
-Zum Thema: <<link>>
+<a href="<<link>>">Zum Thema</a>
 <br /><br />
 
 Ticket-Notify<</email:newComment>>
