@@ -466,20 +466,68 @@ function validateMail( $email )
     return false;
 }
 
-function mailLog( $to, $subject, $message, $headers )
+function mailLog( $to, $toName, $subject, $message, $headers )
 {
   $sql = "
   INSERT INTO 
     tkMails 
-    (`to`, subject, message, headers) 
+    (`to`, toName, subject, message, headers, status) 
   VALUES 
     ( '".mysql_real_escape_string( $to )."',
+      '".mysql_real_escape_string( $toName )."',
       '".mysql_real_escape_string( $subject )."',
       '".mysql_real_escape_string( $message )."',
-      '".mysql_real_escape_string( $headers )."' )
+      '".mysql_real_escape_string( $headers )."',
+      'toWorker' )
   ;";
   
+  #die( $sql );
+  
   $res = mysql_query( $sql );
+  
+  
+  return $res;
+}
+
+
+function sendMail( $subject, $body, $email, $username, $altBody )
+{
+    include_once( "class.phpmailer.php" );
+    $mail             = new PHPMailer();
+
+    $mail->IsSMTP();
+    $mail->SMTPAuth   = true;                  // enable SMTP authentication
+    $mail->SMTPSecure = "ssl";                 // sets the prefix to the servier
+    $mail->Host       = "smtp.gmail.com";      // sets GMAIL as the SMTP server
+    $mail->Port       = 465;                   // set the SMTP port for the GMAIL server
+
+    $mail->Username   = "tickets@kgs.name";  // GMAIL username
+    $mail->Password   = "2EbAsWUgu@pUx&ju+ehu";            // GMAIL password
+
+
+    $mail->AddReplyTo("tickets@kgs.name","Nicht hier antworten!");
+
+    $mail->From       = "tickets@kgs.name";
+    $mail->FromName   = "KG Tickets";
+
+    // here
+    $mail->Subject    = $subject;
+    $mail->AltBody    = $altBody; // optional, comment out and test
+    $mail->WordWrap   = 60; // set word wrap
+    $mail->MsgHTML($body);
+
+    $mail->AddAddress($email, $username);
+
+
+    #$mail->AddAttachment("images/phpmailer.gif");             // attachment
+
+    $mail->IsHTML(true); // send as HTML
+
+    if(!$mail->Send()) {
+      echo "Mailer Error: " . $mail->ErrorInfo;
+    } else {
+      echo "Message sent!";
+    }
 }
 
 /*
@@ -526,6 +574,6 @@ function mailLog( $to, $subject, $message, $headers )
         ";
     $res = mysql_query( $sql );
 
-    return mysql_num_rows( $res ) > 0;
+    return ( $res ? mysql_num_rows( $res ) > 0 : null );
   }
 ?>

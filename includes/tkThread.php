@@ -526,9 +526,10 @@ class tkThread extends felox
         
         // Send the notification mail
         #die( $htmlContent );
-        mailLog( $user["email"], $subject, $message, $headers );
+        mailLog( $user["email"], $user["name"], $subject, $message, $headers );
+        #echo $user["name"];
         #$x = mail( $to, $subject, $message, $headers );
-        $this->sendMail( $subject, $message, $user["email"], $user["name"], "Dies ist eine HTML-Email...man kann sie nur mit einem HTML-Email-View ansehen..." );
+        #sendMail( $subject, $message, $user["email"], $user["name"], "Dies ist eine HTML-Email...man kann sie nur mit einem HTML-Email-View ansehen..." );
         #die( "stop" );
         #echo "sendmail";
          /*echo "<pre>"."Send Mail
@@ -553,49 +554,17 @@ Message: $message"."</pre>";*/
     ;";
       $this->query( $sql );
     }
+    
+    
+    // Send all Mails in the background
+    #> /dev/null &
+    system( "php includes/sendmails.php > includes/maillog &", $ret);  // attention, works only with Linux!
+    #echo $ret;
+    #die("stop");
+    
     return 0;
     #exit;
     
-  }
-          
-  function sendMail( $subject, $body, $email, $username, $altBody )
-  {
-    include_once( "class.phpmailer.php" );
-    $mail             = new PHPMailer();
-    
-    $mail->IsSMTP();
-    $mail->SMTPAuth   = true;                  // enable SMTP authentication
-    $mail->SMTPSecure = "ssl";                 // sets the prefix to the servier
-    $mail->Host       = "smtp.gmail.com";      // sets GMAIL as the SMTP server
-    $mail->Port       = 465;                   // set the SMTP port for the GMAIL server
-
-    $mail->Username   = "tickets@kgs.name";  // GMAIL username
-    $mail->Password   = "2EbAsWUgu@pUx&ju+ehu";            // GMAIL password
-
-
-    $mail->AddReplyTo("tickets@kgs.name","Nicht hier antworten!");
-
-    $mail->From       = "tickets@kgs.name";
-    $mail->FromName   = "KG Tickets";
-
-    // here
-    $mail->Subject    = $subject;
-    $mail->AltBody    = $altBody; // optional, comment out and test
-    $mail->WordWrap   = 60; // set word wrap
-    $mail->MsgHTML($body);
-
-    $mail->AddAddress($email, $username);
-
-
-    #$mail->AddAttachment("images/phpmailer.gif");             // attachment
-
-    $mail->IsHTML(true); // send as HTML
-
-    if(!$mail->Send()) {
-      echo "Mailer Error: " . $mail->ErrorInfo;
-    } else {
-      echo "Message sent!";
-    }
   }
   
   
