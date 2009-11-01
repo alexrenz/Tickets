@@ -316,7 +316,7 @@ Ticket-Notify<</email:newThread>>
 
 <<email:newComment>>Hallo <<username>>,<br /><br />
 
-<<author>> hat in dem Ticket <<frontid>> ("<<subject>>") einen neuen Kommentar abgegeben.<br /><br />
+<<author>> hat in dem Ticket  "<strong><<subject>></strong>" (#<<frontid>>) einen Kommentar erstellt:<br /><br />
 
 <div style="border: 1px solid #E3EAEB; padding: 8px; margin: 10px 0px; background-color: #F4F4F4;">
 <<content>>
