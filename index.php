@@ -10,7 +10,7 @@
     
 */
 
-define( 'TICKET', '1.2.06' );
+define( 'TICKET', '1.2.07' );
 
 
 $bckdir = getcwd( );
