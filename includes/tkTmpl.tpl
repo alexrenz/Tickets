@@ -318,9 +318,9 @@ Ticket-Notify<</email:newThread>>
 
 <<author>> hat in dem Ticket <<frontid>> ("<<subject>>") einen neuen Kommentar abgegeben.<br /><br />
 
-<hr />
+<div style="border: 1px solid #E3EAEB; padding: 8px; margin: 10px 0px; background-color: #F4F4F4;">
 <<content>>
-<hr />
+</div>
 <br /><br />
 <a href="<<link>>">Zum Thema</a>
 <br /><br />
